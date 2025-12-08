@@ -53,7 +53,7 @@ public class RemoteMovieReader implements MovieReader, Closeable {
         }
     }
 
-    private Movie creteMove(String line) {
+    private Movie createMovie(String line) {
         return createMovie(line.split("\t"));
     }
 
