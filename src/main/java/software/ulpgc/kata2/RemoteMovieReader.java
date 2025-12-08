@@ -1,8 +1,10 @@
 package software.ulpgc.kata2;
 
 import java.io.*;
+import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.zip.GZIPInputStream;
 
 public class RemoteMovieReader implements MovieReader, Closeable {
@@ -33,7 +35,7 @@ public class RemoteMovieReader implements MovieReader, Closeable {
 
     @Override
     public List<Movie> readAll() {
-        List<Movie> movies = new ArrayList<>();
+        ArrayList<Movie> movies = new ArrayList<>();
         while (true) {
             Movie movie = readMovie();
             if (movie == null) break;
@@ -45,17 +47,17 @@ public class RemoteMovieReader implements MovieReader, Closeable {
     private Movie readMovie() {
         try {
             String line = reader.readLine();
-            return  line != null ? creteMovie(line) : null;
+            return  line != null ? createMovie(line) : null;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
     private Movie creteMove(String line) {
-        return creteMove(line.split("\t"));
+        return createMovie(line.split("\t"));
     }
 
-    private Movie creteMove(String[] split) {
+    private Movie createMovie(String[] split) {
         return  new Movie(split[2], toInteger(split[7]));
     }
 
